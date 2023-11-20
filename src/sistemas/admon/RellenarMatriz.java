@@ -15,7 +15,6 @@ public final class RellenarMatriz extends javax.swing.JPanel {
      * Creates new form RellenarMatriz
      */
     
-    String Hola;
     int NumFilas,NumColumnas,DatoMatriz;
     String NombreColumnas;
     String NFilas;
