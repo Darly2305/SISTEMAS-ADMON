@@ -237,8 +237,12 @@ public final class RellenarMatriz extends javax.swing.JPanel {
         TextoNumColumnas = jTFNumColumnas.getText();
         NumColumnas = Integer.parseInt(TextoNumColumnas);
         
-        NFilas=jTFNombreFilas.getText();
-        NombreColumnas = jTFNombreColumnas.getText();
+        //NFilas=jTFNombreFilas.getText();
+        //NombreColumnas = jTFNombreColumnas.getText();
+        
+        jTFDatoMatriz.setEnabled(true);
+        jTFNombreFilas.setEnabled(false);
+        jTFNombreColumnas.setEnabled(false);
         
         clic = 3;
     }
