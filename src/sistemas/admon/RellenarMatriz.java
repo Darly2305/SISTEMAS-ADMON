@@ -20,7 +20,7 @@ public final class RellenarMatriz extends javax.swing.JPanel {
     String NFilas;
     String TextoNumFilas,TextoNumColumnas,TextoDatoMatriz;
     int MAX=10;
-    int matrizOriginal[][]=new int[MAX][MAX];
+    int matriz[][]=new int[MAX][MAX];
     int clic=1;
     
     
@@ -255,7 +255,8 @@ public final class RellenarMatriz extends javax.swing.JPanel {
         jTFDatoMatriz.setEnabled(true);
         jTFNumDatosFaltantes.setEnabled(false);
 
-        
+        matriz = new int[NumFilas][NumColumnas];
+
         TextoDatoMatriz = jTFDatoMatriz.getText();
         DatoMatriz = Integer.parseInt(TextoDatoMatriz);
         
@@ -267,6 +268,42 @@ public final class RellenarMatriz extends javax.swing.JPanel {
        
         MatrizOriginal matriz_original=new MatrizOriginal(NombreColumnas,NumFilas,NumColumnas,matrizOriginal);
     }
+    
+    public void llenarMatriz(){
+        
+        int [][] matriz=new int [NumFilas][NumColumnas];
+        
+        for(int i=0;i<NumFilas;i++){
+            for(int j=0;j<NumColumnas;j++){
+                
+                TextoDatoMatriz=jTFDatoMatriz.getText();
+                DatoMatriz= Integer.parseInt(TextoDatoMatriz);
+                
+                matriz[i][j]=DatoMatriz;
+                
+                jTFDatoMatriz.setText("");
+                
+                imprimirMatriz(matriz);
+                
+            }
+        }
+        
+        for(int i=0;i<NumFilas;i++){
+            for(int j=0;j<NumColumnas;j++){ 
+                System.out.println(matriz[i][j]);
+            }
+        }
+    }
+    
+    private void imprimirMatriz(int[][] matriz){
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                System.out.print(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+}
     
     
     private void jBAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAceptarActionPerformed
@@ -299,6 +336,9 @@ public final class RellenarMatriz extends javax.swing.JPanel {
                 break;
             case 3:
                 clic3();
+                break;
+            case 4:
+                llenarMatriz();
                 break;
             default:
                 System.out.println("Noc");
