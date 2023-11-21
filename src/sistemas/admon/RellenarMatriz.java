@@ -15,12 +15,13 @@ public final class RellenarMatriz extends javax.swing.JPanel {
      * Creates new form RellenarMatriz
      */
     
-    int NumFilas,NumColumnas,DatoMatriz;
+    int NumFilas,NumColumnas,filaActual = 0,columnaActual = 0;
+    float DatoMatriz;
     String NombreColumnas;
     String NFilas;
     String TextoNumFilas,TextoNumColumnas,TextoDatoMatriz;
     int MAX=10;
-    int matriz[][]=new int[MAX][MAX];
+    float matriz[][]=new float[MAX][MAX];
     int clic=1;
     
     
@@ -255,24 +256,39 @@ public final class RellenarMatriz extends javax.swing.JPanel {
         jTFDatoMatriz.setEnabled(true);
         jTFNumDatosFaltantes.setEnabled(false);
 
-        matriz = new int[NumFilas][NumColumnas];
+        //matriz = new int[NumFilas][NumColumnas];
 
-        TextoDatoMatriz = jTFDatoMatriz.getText();
-        DatoMatriz = Integer.parseInt(TextoDatoMatriz);
+        filaActual=0;
+        columnaActual=0;
         
 
         clic = 4;
     }
     
-    public void pasarmatriz(){
+    public void pasarmatriz(float [][] matriz){
        
-        MatrizOriginal matriz_original=new MatrizOriginal(NombreColumnas,NumFilas,NumColumnas,matrizOriginal);
+        MatrizOriginal matriz_original=new MatrizOriginal(NombreColumnas,NumFilas,NumColumnas,matriz);
+        ModeloAsignacion modelo_asignacion = new ModeloAsignacion();
+        for(int i=0;i<NumFilas;i++){
+            for(int j=0;j<NumColumnas;j++){
+                System.out.print(matriz_original.matriz_original[i][j] + " ");
+            }
+            System.out.println("");
+        }
+        modelo_asignacion.obtenerMatrizFicticia(matriz_original);
+        
+        System.out.println("");
+        for(int i=0;i<NumFilas;i++){
+            for(int j=0;j<NumColumnas;j++){
+                System.out.print(matriz_original.matriz_original[i][j] + " ");
+            }
+            System.out.println("");
+        }
     }
     
     public void llenarMatriz(){
         
-        int [][] matriz=new int [NumFilas][NumColumnas];
-        
+        /*
         for(int i=0;i<NumFilas;i++){
             for(int j=0;j<NumColumnas;j++){
                 
@@ -292,16 +308,52 @@ public final class RellenarMatriz extends javax.swing.JPanel {
             for(int j=0;j<NumColumnas;j++){ 
                 System.out.println(matriz[i][j]);
             }
+        }*/
+        
+        TextoDatoMatriz = jTFDatoMatriz.getText();
+        DatoMatriz = Float.parseFloat(TextoDatoMatriz);
+        
+        matriz[filaActual][columnaActual] = DatoMatriz;
+        System.out.println(matriz[filaActual][columnaActual]);
+
+        // Limpia el JTextField después de cada entrada
+        jTFDatoMatriz.setText("");
+
+        // Imprime la matriz hasta el momento (opcional)
+        //imprimirMatriz(matriz);
+
+        // Mueve el cursor a la siguiente posición en la matriz
+        columnaActual++;
+        
+        // Verifica si se completó una fila
+        if (columnaActual == NumColumnas) {
+            filaActual++;
+            columnaActual = 0;
+        }
+
+        // Verifica si se llenó toda la matriz
+        if (filaActual == NumFilas) {
+            // Aquí puedes realizar cualquier acción adicional al completar la matriz
+            System.out.println("Matriz completada");
+            /*for (int i = 0; i < NumFilas; i++) {
+                for (int j = 0; j < NumColumnas; j++) {
+                    System.out.println(matriz[i][j]);
+                }
+        }*/
+            imprimirMatriz(matriz);
         }
     }
     
-    private void imprimirMatriz(int[][] matriz){
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[0].length; j++) {
+    
+    private void imprimirMatriz(float[][] matriz){
+        for (int i = 0; i < NumFilas; i++) {
+            for (int j = 0; j < NumColumnas; j++) {
                 System.out.print(matriz[i][j] + " ");
             }
             System.out.println();
         }
+        
+        pasarmatriz(matriz);
         System.out.println();
 }
     
