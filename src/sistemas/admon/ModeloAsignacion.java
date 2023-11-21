@@ -17,9 +17,9 @@ public class ModeloAsignacion {
         
         int filas_ficticias, columnas_ficticias, diferencia = 0;
         final int MAX = 10;
-        int matriz_ficticia[][] = new int[MAX][MAX];   
+        float matriz_ficticia[][] = new float[MAX][MAX];   
         
-        matriz_original = obtenerMatrizResultante.llenarMatriz(matriz_original);
+        //matriz_original = obtenerMatrizResultante.llenarMatriz(matriz_original);
         
         
         if(matriz_original.filas_original > matriz_original.columnas_original){
@@ -105,9 +105,9 @@ public class ModeloAsignacion {
         return matriz_original;
     }
     
-    public int[][] restarMenorFilas(int matriz_ficticia[][], int filas_ficticias, int columnas_ficticias){
-        int menor = 1000000000;
-        int menores_filas[] = new int[filas_ficticias];
+    public float[][] restarMenorFilas(float matriz_ficticia[][], int filas_ficticias, int columnas_ficticias){
+        float menor = 1000000000.0f;
+        float menores_filas[] = new float[filas_ficticias];
         
         for(int i=0;i<filas_ficticias;i++){
             for(int j=0;j<columnas_ficticias;j++){                              
@@ -129,9 +129,9 @@ public class ModeloAsignacion {
         return matriz_ficticia;
     } 
     
-    public int[][] restarMenorColumnas(int matriz_ficticia[][], int filas_ficticias, int columnas_ficticias){
-        int menor = 1000000000;
-        int menores_columnas[] = new int[columnas_ficticias];
+    public float[][] restarMenorColumnas(float matriz_ficticia[][], int filas_ficticias, int columnas_ficticias){
+        float menor = 1000000000.f;
+        float menores_columnas[] = new float[columnas_ficticias];
         
         for(int i=0;i<filas_ficticias;i++){
             for(int j=0;j<columnas_ficticias;j++){                              
@@ -153,8 +153,9 @@ public class ModeloAsignacion {
         return matriz_ficticia;
     } 
     
-    public int[][] matrizResultante(int matriz_ficticia[][], int filas_ficticias, int columnas_ficticias,MatrizOriginal matriz_original){
-        int total_tachados = 0, menor_libres = 1000000;//menor de los valores que no fueron tachados
+    public float[][] matrizResultante(float matriz_ficticia[][], int filas_ficticias, int columnas_ficticias,MatrizOriginal matriz_original){
+        int total_tachados = 0;
+        float menor_libres = 10000000.0f;//menor de los valores que no fueron tachados
         boolean matriz_final = false;
         
         int filas_ceros[] = new int[filas_ficticias];
@@ -342,7 +343,7 @@ public class ModeloAsignacion {
         
         int contCoordenadasFinalesFilas = 0;
         
-        int valores_finales[] = new int[filas_ficticias];
+        float valores_finales[] = new float[filas_ficticias];
         int orden_salidaFilas[] = new int[filas_ficticias];
         int orden_salidaColumnas[] = new int[filas_ficticias];
         int contValores_finales = 0;
@@ -354,9 +355,9 @@ public class ModeloAsignacion {
         for(int i=0;i<filas_ficticias;i++){
             for(int j=0;j<columnas_ficticias;j++){
                 if(i < 3){
-                    System.out.print(matriz_ficticia[i][j] + " ");
+                    System.out.printf("%.2f" + matriz_ficticia[i][j] + " ");
                 }else{
-                    System.out.print(matriz_ficticia[i][j] + " ");
+                    System.out.print("%.2f" + matriz_ficticia[i][j] + " ");
                 }
             }
             System.out.println("");
