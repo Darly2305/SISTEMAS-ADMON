@@ -231,6 +231,10 @@ public class iniciarSesion extends javax.swing.JFrame {
         }
     }
     
+    public void cambiarResultados(){
+        
+    }
+    
     /**
      * @param args the command line arguments
      */

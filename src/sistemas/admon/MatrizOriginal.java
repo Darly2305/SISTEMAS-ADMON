@@ -20,8 +20,8 @@ public class MatrizOriginal {
         this.filas_original = filas_localidades;
         this.columnas_original = columnas_objeto;
         this.matriz_original = matriz_original;
-        for(int i=0;i<filas_localidades;i++){
-            for(int j=0;j<columnas_objeto;j++){
+        for (int i = 0; i < filas_localidades; i++) {
+            for (int j = 0; j < columnas_objeto; j++) {
                 this.matriz_original[i][j] = matrizOriginal1[i][j];
             }
         }
