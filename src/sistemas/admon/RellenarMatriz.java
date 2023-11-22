@@ -15,7 +15,7 @@ public final class RellenarMatriz extends javax.swing.JPanel {
      * Creates new form RellenarMatriz
      */
     
-    int NumFilas,NumColumnas,filaActual = 0,columnaActual = 0;
+    int NumFilas,NumColumnas,filaActual = 0,columnaActual = 0,contador=NumFilas*NumColumnas;
     float DatoMatriz;
     String NombreColumnas;
     String NFilas;
@@ -102,6 +102,12 @@ public final class RellenarMatriz extends javax.swing.JPanel {
         jTFNumFilas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFNumFilasActionPerformed(evt);
+            }
+        });
+
+        jTFNumDatosFaltantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFNumDatosFaltantesActionPerformed(evt);
             }
         });
 
@@ -319,12 +325,16 @@ public final class RellenarMatriz extends javax.swing.JPanel {
         // Limpia el JTextField después de cada entrada
         jTFDatoMatriz.setText("");
 
+        jTFNumDatosFaltantes.setText(""+NumFilas*NumColumnas+(-1));
+        jTFNumDatosFaltantes.setEnabled(false);
+        
+        
         // Imprime la matriz hasta el momento (opcional)
         //imprimirMatriz(matriz);
 
         // Mueve el cursor a la siguiente posición en la matriz
         columnaActual++;
-        
+     
         // Verifica si se completó una fila
         if (columnaActual == NumColumnas) {
             filaActual++;
@@ -405,6 +415,10 @@ public final class RellenarMatriz extends javax.swing.JPanel {
     private void jTFNumFilasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNumFilasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFNumFilasActionPerformed
+
+    private void jTFNumDatosFaltantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNumDatosFaltantesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNumDatosFaltantesActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

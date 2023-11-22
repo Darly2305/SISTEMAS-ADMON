@@ -210,6 +210,9 @@
     <Component class="javax.swing.JTextField" name="jTFNombreColumnas">
     </Component>
     <Component class="javax.swing.JTextField" name="jTFNumDatosFaltantes">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFNumDatosFaltantesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTFDatoMatriz">
     </Component>

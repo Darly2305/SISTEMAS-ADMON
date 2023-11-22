@@ -354,10 +354,16 @@ public class ModeloAsignacion {
         System.out.println("");        
         for(int i=0;i<filas_ficticias;i++){
             for(int j=0;j<columnas_ficticias;j++){
-                if(i < 3){
-                    System.out.printf("%.2f" + matriz_ficticia[i][j] + " ");
+                /*if(i < 3){
+                    System.out.printf("%0.2f", matriz_ficticia[i][j] +" ");
                 }else{
-                    System.out.print("%.2f" + matriz_ficticia[i][j] + " ");
+                    System.out.printf("%0.2f", matriz_ficticia[i][j] + " ");
+                }*/
+                
+                if(matriz_ficticia[i][j] > 0.001){
+                    System.out.print(matriz_ficticia[i][j] + " ");
+                }else{
+                    System.out.print(0 + " ");
                 }
             }
             System.out.println("");
