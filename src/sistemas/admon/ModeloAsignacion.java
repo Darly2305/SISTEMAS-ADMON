@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author jose_
  */
 public class ModeloAsignacion {
-    public void obtenerMatrizFicticia(MatrizOriginal matriz_original){
+    public float[][] obtenerMatrizFicticia(MatrizOriginal matriz_original){
         Scanner sc = new Scanner(System.in);
         ModeloAsignacion obtenerMatrizResultante = new ModeloAsignacion();
         
@@ -86,7 +86,23 @@ public class ModeloAsignacion {
         
         //mandar matriz_ficticia
         matriz_ficticia = obtenerMatrizResultante.matrizResultante(matriz_ficticia, filas_ficticias, columnas_ficticias, matriz_original);
-                                            
+        
+        System.out.println("");  
+        
+        for(int i=0;i<filas_ficticias;i++){
+            for(int j=0;j<columnas_ficticias;j++){
+                if(matriz_ficticia[i][j] > 0.001){
+                    System.out.print(matriz_ficticia[i][j] + " ");
+                }else{
+                    System.out.print(0 + " ");
+                }
+            }
+            System.out.println("");
+        }
+        
+        System.out.println("oiasfsabfkjafjsbdjfbkfbajbfjaibjfsbl");
+        
+        return matriz_ficticia;
     }
     
     public MatrizOriginal llenarMatriz(MatrizOriginal matriz_original){
@@ -344,67 +360,86 @@ public class ModeloAsignacion {
         int contCoordenadasFinalesFilas = 0;
         
         float valores_finales[] = new float[filas_ficticias];
-        int orden_salidaFilas[] = new int[filas_ficticias];
+        float orden_salidaFilas[] = new float[filas_ficticias];
         int orden_salidaColumnas[] = new int[filas_ficticias];
         int contValores_finales = 0;
         
         System.out.println("");
         System.out.println("Sooooooooooooooooo   ");
         
-        System.out.println("");        
+        System.out.println("");    
+        
         for(int i=0;i<filas_ficticias;i++){
             for(int j=0;j<columnas_ficticias;j++){
-                /*if(i < 3){
-                    System.out.printf("%0.2f", matriz_ficticia[i][j] +" ");
-                }else{
-                    System.out.printf("%0.2f", matriz_ficticia[i][j] + " ");
-                }*/
-                
-                if(matriz_ficticia[i][j] > 0.001){
+                if(i < 3){
                     System.out.print(matriz_ficticia[i][j] + " ");
                 }else{
-                    System.out.print(0 + " ");
+                    System.out.print(matriz_ficticia[i][j] + " ");
+                }
+            }
+            System.out.println("");
+        }
+        
+        for(int i=0;i<filas_ficticias;i++){
+            for(int j=0;j<columnas_ficticias;j++){
+                if(matriz_ficticia[i][j] < 0.009){
+                    matriz_ficticia[i][j] = 0.0f;
+                }
+            }           
+        }
+        
+        System.out.println("");
+        
+        for(int i=0;i<filas_ficticias;i++){
+            for(int j=0;j<columnas_ficticias;j++){
+                if(i < 3){
+                    System.out.print(matriz_ficticia[i][j] + " ");
+                }else{
+                    System.out.print(matriz_ficticia[i][j] + " ");
                 }
             }
             System.out.println("");
         }
        
-        int dos_iguales = 0;
+        int cont_total = 0;
         boolean limite_iguales = false;
+        float valor_menor = 100000000000.0f;
         
        do{
-           
-           if(dos_iguales == 2){
-               limite_iguales = true;
-           }
-           
-           if(limite_iguales == true){
+        valor_menor = 100000000000.0f;       
+        
+        if((limite_iguales == true) && (cont_total >= 2)){ 
+               int fila_menor = 0, columna_menor = 0;
                for(int i=0;i<filas_ficticias;i++){
                   for(int j=0;j<filas_ficticias;j++){
-                     if((matriz_ficticia[i][j] == 0) && (matrizFinal_visitados[i][j] == false)){
-                         for(int k=0;k<filas_ficticias;k++){
-                             matrizFinal_visitados[i][k] = true;
-                         }
-                         
-                         for(int k=0;k<filas_ficticias;k++){
-                             matrizFinal_visitados[k][j] = true;
-                         }
-                         
-                         coordenadasFinales_filas[contCoordenadasFinalesFilas] = i;
-                         coordenadasFinales_columnas[contCoordenadasFinalesFilas] = j;
-                         cont_final++;
-                         valores_finales[contValores_finales] =  matriz_original.matriz_original[i][j];
-                         orden_salidaFilas[contValores_finales] = i;
-                         orden_salidaColumnas[contValores_finales] = j;
-                         contValores_finales++;
+                     if((matriz_ficticia[i][j] == 0) && (matrizFinal_visitados[i][j] == false) && (matriz_original.matriz_original[i][j] <= valor_menor)){
+                         valor_menor = matriz_ficticia[i][j];
+                         fila_menor = i;
+                         columna_menor = j;             
                      }
                   } 
                }
                
-               limite_iguales = false;
-               dos_iguales = 0;
+               for(int k=0;k<filas_ficticias;k++){
+                    matrizFinal_visitados[fila_menor][k] = true;                
+               }
+                         
+               for(int k=0;k<filas_ficticias;k++){
+                    matrizFinal_visitados[k][columna_menor] = true;  
+               }
+                         
+               coordenadasFinales_filas[contCoordenadasFinalesFilas] = fila_menor;
+               coordenadasFinales_columnas[contCoordenadasFinalesFilas] = columna_menor;
+               cont_final++;
+               valores_finales[contValores_finales] =  matriz_original.matriz_original[fila_menor][columna_menor];
+               orden_salidaFilas[contValores_finales] = fila_menor;
+               orden_salidaColumnas[contValores_finales] = columna_menor;
+               contValores_finales++;
+               
+               limite_iguales = false;               
            }
-            
+        cont_total++;
+                                                       
         for(int i=0;i<filas_ficticias;i++){
             ceros_finales[i] = 0;
         }
@@ -415,6 +450,12 @@ public class ModeloAsignacion {
                    ceros_finales[i]++;
                }
            } 
+        }
+        
+        for(int i=0;i<filas_ficticias;i++){
+            if(ceros_finales[i] >= 2){
+                limite_iguales = true;
+            }
         }
         
         for(int i=0;i<filas_ficticias;i++){
@@ -436,8 +477,15 @@ public class ModeloAsignacion {
                }
            }
         }
+                               
+         if(limite_iguales == true){
+               limite_iguales = false;
+           }
+             
         
-        //Contar 0 columnas        
+        //Contar 0 columnas 
+        valor_menor = 100000000000.0f;
+        
         for(int i=0;i<filas_ficticias;i++){
             ceros_finales[i] = 0;
         }
@@ -448,6 +496,12 @@ public class ModeloAsignacion {
                    ceros_finales[i]++;
                }
            } 
+        }
+        
+        for(int i=0;i<filas_ficticias;i++){
+            if(ceros_finales[i] > 1){
+                limite_iguales = true;
+            }
         }
         
         for(int i=0;i<columnas_ficticias;i++){
@@ -470,11 +524,47 @@ public class ModeloAsignacion {
            }
         } 
         
-        dos_iguales++;
         
+        if((limite_iguales == true) && (cont_total >= 2)){ 
+               int fila_menor = 0, columna_menor = 0;
+               for(int i=0;i<filas_ficticias;i++){
+                  for(int j=0;j<filas_ficticias;j++){
+                     if((matriz_ficticia[i][j] == 0) && (matrizFinal_visitados[i][j] == false) && (matriz_original.matriz_original[i][j] <= valor_menor)){
+                         valor_menor = matriz_original.matriz_original[i][j];
+                         fila_menor = i;
+                         columna_menor = j;
+                     }
+                  } 
+               }
+               
+               for(int k=0;k<filas_ficticias;k++){
+                    matrizFinal_visitados[fila_menor][k] = true;                
+               }
+                         
+               for(int k=0;k<filas_ficticias;k++){
+                    matrizFinal_visitados[k][columna_menor] = true;  
+               }
+                         
+               coordenadasFinales_filas[contCoordenadasFinalesFilas] = fila_menor;
+               coordenadasFinales_columnas[contCoordenadasFinalesFilas] = columna_menor;
+               cont_final++;
+               valores_finales[contValores_finales] =  matriz_original.matriz_original[fila_menor][columna_menor];
+               orden_salidaFilas[contValores_finales] = fila_menor;
+               orden_salidaColumnas[contValores_finales] = columna_menor;
+               contValores_finales++;
+               
+               limite_iguales = false;
+               //dos_iguales = 0;
+           }
+        cont_total++;
+        
+        if(limite_iguales == true){
+            limite_iguales = false;
+        }
+        
+        //dos_iguales++;        
        }while(cont_final != filas_ficticias);
-       
-        
+
        System.out.println("");
         
        for(int i=0;i<filas_ficticias;i++){
